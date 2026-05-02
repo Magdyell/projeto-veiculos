@@ -3,90 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Veículos</title>
+  <title>Lista de Veículos</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header class="topo">
-    <h1>Sistema de Cadastro de Veículos</h1>
-    <p>Cadastro de veículos disponíveis para venda</p>
+    <h1>Veículos Cadastrados</h1>
+    <p>Consulta dos veículos disponíveis para venda</p>
   </header>
 
   <main class="container">
     <section class="card">
-      <h2>Cadastrar Veículo</h2>
+      <div class="cabecalho-lista">
+        <h2>Lista de Veículos</h2>
+        <a href="index.html" class="link-botao">Novo Cadastro</a>
+      </div>
 
-      <form id="formVeiculo">
-        <div class="grid">
-          <div class="campo">
-            <label for="placa">Placa</label>
-            <input type="text" id="placa" name="placa" required>
-          </div>
-
-          <div class="campo">
-            <label for="marca">Marca</label>
-            <input type="text" id="marca" name="marca" required>
-          </div>
-
-          <div class="campo">
-            <label for="modelo">Modelo</label>
-            <input type="text" id="modelo" name="modelo" required>
-          </div>
-
-          <div class="campo">
-            <label for="ano_fabricacao">Ano de Fabricação</label>
-            <input type="number" id="ano_fabricacao" name="ano_fabricacao" required>
-          </div>
-
-          <div class="campo">
-            <label for="ano_modelo">Ano do Modelo</label>
-            <input type="number" id="ano_modelo" name="ano_modelo" required>
-          </div>
-
-          <div class="campo">
-            <label for="cor">Cor</label>
-            <input type="text" id="cor" name="cor" required>
-          </div>
-
-          <div class="campo">
-            <label for="combustivel">Combustível</label>
-            <input type="text" id="combustivel" name="combustivel" required>
-          </div>
-
-          <div class="campo">
-            <label for="quilometragem">Quilometragem</label>
-            <input type="number" id="quilometragem" name="quilometragem" required>
-          </div>
-
-          <div class="campo">
-            <label for="chassi">Chassi</label>
-            <input type="text" id="chassi" name="chassi" required>
-          </div>
-
-          <div class="campo">
-            <label for="renavam">Renavam</label>
-            <input type="text" id="renavam" name="renavam" required>
-          </div>
-
-          <div class="campo">
-            <label for="data_cadastro">Data de Cadastro</label>
-            <input type="date" id="data_cadastro" name="data_cadastro" required>
-          </div>
-
-          <div class="campo campo-full">
-            <label for="observacoes">Observações</label>
-            <textarea id="observacoes" name="observacoes" required></textarea>
-          </div>
-        </div>
-
-        <button type="submit">Cadastrar Veículo</button>
-        <a href="listar.html" class="link-botao">Consultar Veículos</a>
-      </form>
-
-      <p id="mensagem"></p>
+      <div class="tabela-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Placa</th>
+              <th>Marca</th>
+              <th>Modelo</th>
+              <th>Ano Fab.</th>
+              <th>Ano Mod.</th>
+              <th>Cor</th>
+              <th>Combustível</th>
+              <th>KM</th>
+              <th>Chassi</th>
+              <th>Renavam</th>
+              <th>Data</th>
+              <th>Observações</th>
+            </tr>
+          </thead>
+          <tbody id="corpoTabela"></tbody>
+        </table>
+      </div>
     </section>
   </main>
 
-  <script src="js/cadastro.js"></script>
+  <script src="js/listar.js"></script>
 </body>
 </html>
