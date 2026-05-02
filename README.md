@@ -1,18 +1,48 @@
-CREATE DATABASE IF NOT EXISTS sistema_veiculos;
-USE sistema_veiculos;
+# Sistema de Cadastro de Veículos
 
-CREATE TABLE IF NOT EXISTS veiculos (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  placa VARCHAR(10) NOT NULL,
-  marca VARCHAR(50) NOT NULL,
-  modelo VARCHAR(50) NOT NULL,
-  ano_fabricacao INT NOT NULL,
-  ano_modelo INT NOT NULL,
-  cor VARCHAR(30) NOT NULL,
-  combustivel VARCHAR(30) NOT NULL,
-  quilometragem INT NOT NULL,
-  chassi VARCHAR(30) NOT NULL,
-  renavam VARCHAR(20) NOT NULL,
-  data_cadastro DATE NOT NULL,
-  observacoes TEXT NOT NULL
-);
+Projeto desenvolvido para o Desafio Profissional da disciplina Linguagens de Programação.
+
+## Tecnologias utilizadas
+
+- HTML
+- CSS
+- JavaScript
+- PHP
+- MySQL
+
+## Funcionalidades
+
+- Cadastro de veículos
+- Consulta de veículos cadastrados
+- Retorno dos dados em JSON pelo PHP
+- Montagem dinâmica da tabela HTML com JavaScript
+
+## Como executar
+
+1. Instale o XAMPP.
+2. Copie a pasta do projeto para `htdocs`.
+3. Abra o phpMyAdmin.
+4. Importe o arquivo `banco.sql`.
+5. Acesse no navegador:
+
+```text
+http://localhost/projeto_cadastro_veiculos/index.html
+```
+
+## Estrutura
+
+```text
+projeto_cadastro_veiculos/
+├── index.html
+├── listar.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── cadastro.js
+│   └── listar.js
+├── php/
+│   ├── conexao.php
+│   ├── salvar_veiculo.php
+│   └── listar_veiculos.php
+└── banco.sql
+```
