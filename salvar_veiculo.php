@@ -1,35 +1,70 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("formVeiculo");
-  const mensagem = document.getElementById("mensagem");
-  const dataCadastro = document.getElementById("data_cadastro");
+<?php
+header("Content-Type: application/json; charset=UTF-8");
+require_once "conexao.php";
 
-  dataCadastro.value = new Date().toISOString().split("T")[0];
+$campos = [
+    "placa", "marca", "modelo", "ano_fabricacao", "ano_modelo",
+    "cor", "combustivel", "quilometragem", "chassi",
+    "renavam", "data_cadastro", "observacoes"
+];
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const dados = new FormData(form);
-
-    try {
-      const resposta = await fetch("php/salvar_veiculo.php", {
-        method: "POST",
-        body: dados
-      });
-
-      const resultado = await resposta.json();
-
-      if (resultado.sucesso) {
-        mensagem.style.color = "green";
-        mensagem.textContent = resultado.mensagem;
-        form.reset();
-        dataCadastro.value = new Date().toISOString().split("T")[0];
-      } else {
-        mensagem.style.color = "red";
-        mensagem.textContent = resultado.mensagem;
-      }
-    } catch (erro) {
-      mensagem.style.color = "red";
-      mensagem.textContent = "Erro ao enviar os dados.";
+foreach ($campos as $campo) {
+    if (!isset($_POST[$campo]) || trim($_POST[$campo]) === "") {
+        echo json_encode([
+            "sucesso" => false,
+            "mensagem" => "Todos os campos são obrigatórios."
+        ]);
+        exit;
     }
-  });
-});
+}
+
+$placa = $_POST["placa"];
+$marca = $_POST["marca"];
+$modelo = $_POST["modelo"];
+$ano_fabricacao = intval($_POST["ano_fabricacao"]);
+$ano_modelo = intval($_POST["ano_modelo"]);
+$cor = $_POST["cor"];
+$combustivel = $_POST["combustivel"];
+$quilometragem = intval($_POST["quilometragem"]);
+$chassi = $_POST["chassi"];
+$renavam = $_POST["renavam"];
+$data_cadastro = $_POST["data_cadastro"];
+$observacoes = $_POST["observacoes"];
+
+$sql = "INSERT INTO veiculos 
+(placa, marca, modelo, ano_fabricacao, ano_modelo, cor, combustivel, quilometragem, chassi, renavam, data_cadastro, observacoes)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+$stmt = $conn->prepare($sql);
+
+$stmt->bind_param(
+    "sssiississss",
+    $placa,
+    $marca,
+    $modelo,
+    $ano_fabricacao,
+    $ano_modelo,
+    $cor,
+    $combustivel,
+    $quilometragem,
+    $chassi,
+    $renavam,
+    $data_cadastro,
+    $observacoes
+);
+
+if ($stmt->execute()) {
+    echo json_encode([
+        "sucesso" => true,
+        "mensagem" => "Veículo cadastrado com sucesso!"
+    ]);
+} else {
+    echo json_encode([
+        "sucesso" => false,
+        "mensagem" => "Erro ao cadastrar veículo."
+    ]);
+}
+
+$stmt->close();
+$conn->close();
+?>
